@@ -32,7 +32,7 @@ function submit() {
   if (
     titleValue === "" ||
     authorValue === "" ||
-    !pagesValue ||
+    !Number.isInteger(pagesValue) ||
     pagesValue <= 0
   ) {
     alert("Please enter valid input!");
@@ -64,23 +64,14 @@ function Book(title, author, pages, isRead) {
 
 function render() {
   const table = document.getElementById("display");
+  const tbody = table.querySelector("tbody");
 
-  table.innerHTML = `
-    <thead class="thead-dark">
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Number of Pages</th>
-        <th>Read</th>
-        <th></th>
-      </tr>
-    </thead>
-  `;
+  tbody.innerHTML = "";
 
   for (let i = 0; i < myLibrary.length; i++) {
     const book = myLibrary[i];
 
-    const row = table.insertRow();
+    const row = tbody.insertRow();
 
     const titleCell = row.insertCell(0);
     const authorCell = row.insertCell(1);
@@ -92,6 +83,7 @@ function render() {
     authorCell.textContent = book.author;
     pagesCell.textContent = book.pages;
 
+    // toggle read button
     const toggleReadBtn = document.createElement("button");
     toggleReadBtn.className = "btn btn-success";
     toggleReadBtn.textContent = book.isRead ? "Yes" : "No";
@@ -103,6 +95,7 @@ function render() {
 
     readCell.appendChild(toggleReadBtn);
 
+    // delete button
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "btn btn-warning";
     deleteBtn.textContent = "Delete";
