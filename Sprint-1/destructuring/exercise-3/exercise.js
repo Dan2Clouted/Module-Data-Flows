@@ -7,7 +7,7 @@ let order = [
   { itemName: "Hash Brown", quantity: 4, unitPricePence: 40 },
 ];
 
-console.log("QTY".padEnd(8) + "ITEM".padEnd(20) + "TOTAL");
+console.log("QTY".padEnd(8) + "ITEM".padEnd(20) + "TOTAL".padStart(8));
 
 let total = 0;
 
@@ -17,7 +17,9 @@ order.forEach(({ itemName, quantity, unitPricePence }) => {
   total += lineTotal;
 
   console.log(
-    `${quantity}`.padEnd(8) + itemName.padEnd(20) + lineTotal.toFixed(2)
+    `${quantity}`.padEnd(8) +
+      itemName.padEnd(20) +
+      lineTotal.toFixed(2).padStart(8)
   );
 });
 
